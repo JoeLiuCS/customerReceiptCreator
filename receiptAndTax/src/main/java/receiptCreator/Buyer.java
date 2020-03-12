@@ -15,8 +15,8 @@ public class Buyer {
 	static String inputsFilePath = sourseFilePath + "/Inputs/";
 	static CategorySaver categories;
 	
-	Map<Double,String> priceAndItem = new HashMap<>();
-	List<List<Double>> prices = new LinkedList<>();
+//	Map<Double,String> priceAndItem = new HashMap<>();
+//	List<List<Double>> prices = new LinkedList<>();
 	
 	public static void main(String[] args) {
 		
@@ -31,27 +31,29 @@ public class Buyer {
 			  if (listOfFiles[i].isFile()) {
 				  
 				String fileName = listOfFiles[i].getName();
-				String categoryName = fileName.substring(0, fileName.length()-4);
+				String textName = fileName.substring(0, fileName.length()-4);
 				
-				inputReader(inputsFilePath + fileName);
+				TextCreator textOutput = new TextCreator(inputsFilePath,textName);
+				inputReader(inputsFilePath + fileName,textOutput);
 			  }
 		}
 	}
 	
-	private static void inputReader(String inputPath) {
+	private static void inputReader(String inputPath, TextCreator textOutput) {
 		try {
 		    BufferedReader lineReader = new BufferedReader(new FileReader(inputPath));
 		    String lineText = null;
 		    
 		    double salesTax = 0.0;
 		    double total = 0.0;
-		 
+		    
+		    
+		    
 		    while ((lineText = lineReader.readLine()) != null) {
 		    	String[] stringArray = lineText.toLowerCase().split(" ");
 		    	//book food or medicines
 		    	boolean categoryWaiveTax = checkCategory(stringArray);
-		    	
-		    	Boolean imported = isImported(stringArray);
+		    	boolean imported = isImported(stringArray);
 		    	
 		    	double taxRate = 1.0;
 		    	if(! categoryWaiveTax) taxRate += 0.1;
@@ -60,19 +62,21 @@ public class Buyer {
 		    	Double price = Double.valueOf(stringArray[stringArray.length-1]);
 		    	
 		    	Double priceAfterTax = priceRound(price * taxRate);
-		    	System.out.println("Price: " + priceRound(priceAfterTax));
+//		    	System.out.println("Price: " + priceAfterTax);
 		    	
 		    	salesTax = Math.round((salesTax + priceAfterTax - price) * 100.0) / 100.0;
 		    	total = Math.round((total + priceAfterTax) * 100.0) / 100.0;
 		    	
-		    	System.out.println("sales tax: " + salesTax + " total: " + total);
+		    	textOutput.writeIn(outputString(stringArray)+Double.toString(priceAfterTax));
 		    	
-//		    	System.out.print("Categ:"+ category );
-//		    	System.out.println("Imported:"+ imported );
+		    	System.out.println(outputString(stringArray)+Double.toString(priceAfterTax));
+		    	
 		    	
 		    }
+		    textOutput.writeIn("Sales Tax: " + salesTax + " \nTotal: " + total);
+		    System.out.println("Sales Tax: " + salesTax + " \nTotal: " + total+"\n");
 		    
-		    System.out.println("Finished");
+		    textOutput.closeText();
 		    lineReader.close();
 		} catch (IOException ex) {
 		    System.err.println(ex);
@@ -130,4 +134,12 @@ public class Buyer {
 		return Double.valueOf(newPrice);
 	}
 
+	
+	private static String outputString(String[] strArray) {
+		String[] newString = new String[strArray.length - 2];
+		for(int i=0;i<newString.length;i++) {
+			newString[i] = strArray[i];
+		}
+		return String.join(" ", newString) + ": ";
+	}
 }

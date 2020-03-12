@@ -65,11 +65,11 @@ public class CategorySaver {
 		  }
 		}
 		
-		System.out.println("Foods total:" + foods.size()+" books total: "+books.size() + " medicines total: "+medicines.size());
+//		System.out.println("Foods total:" + foods.size()+" books total: "+books.size() + " medicines total: "+medicines.size());
 	}
 	
 	private void storeFile(Set<String> product,String productPath) {
-		System.out.println("My path:"+productPath);
+//		System.out.println("My path:"+productPath);
 		try {
 		    BufferedReader lineReader = new BufferedReader(new FileReader(productPath));
 		    String lineText = null;
