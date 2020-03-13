@@ -6,18 +6,30 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 public class Buyer {
 
-	static String sourseFilePath = "/Users/shuoqiaoliu/git/customerReceiptCreator/receiptAndTax/src/main/resources/";
-	static String inputsFilePath = sourseFilePath + "Inputs/";
+	static String sourseFilePath = "";
+	static String inputsFilePath = "";
 	static CategorySaver categories;
-	static DataBaseCreator myOutputDataBase = new DataBaseCreator("outputDatabase", sourseFilePath);
+	static DataBaseCreator myOutputDataBase;
 	
 	static Queue<String> mostExpensiveInLastThree = new LinkedList<>();
 	static Queue<Double> amountInLastThree = new LinkedList<>();
 	
 	public static void main(String[] args) {
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("---Please type absolute path from source files---");
+		System.out.println("For Example: /User/Source File/");
+		sourseFilePath += scan.nextLine();
+		System.out.println("---Please type absolute path for Input files---");
+		System.out.println("For Example: /User/Inputs/");
+		inputsFilePath += scan.nextLine();
+		scan.close();
+		
+		myOutputDataBase = new DataBaseCreator("outputDatabase", sourseFilePath);
 		
 		categories = new CategorySaver(sourseFilePath); 
 		
