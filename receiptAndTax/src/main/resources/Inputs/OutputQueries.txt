@@ -1,0 +1,6 @@
+The most expensive item purchased in each of the last 3 transactions
+1 music cd: 16.49
+1 imported bottle of perfume: 32.19
+1 imported bottle of perfume: 54.65
+The average amount spent between the last 3 transactions
+56.55
