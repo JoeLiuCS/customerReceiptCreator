@@ -10,7 +10,7 @@ public class TextCreator {
 	
 	public TextCreator(String storePath,String fileName) {
 		try {
-			writer = new PrintWriter(storePath+"Output"+fileName+".txt", "UTF-8");
+			this.writer = new PrintWriter(storePath+"Output"+fileName+".txt", "UTF-8");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -19,10 +19,10 @@ public class TextCreator {
 	}
 	
 	public void writeIn(String str) {
-		writer.println(str);
+		this.writer.println(str);
 	}
 	
 	public void closeText() {
-		writer.close();
+		this.writer.close();
 	}
 }
