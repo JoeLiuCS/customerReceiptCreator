@@ -6,10 +6,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * This class use for classification.
+ * Base on the inputs, it will return book, food, medicine or else.
+ * @author shuoqiaoliu
+ *
+ */
 public class CategorySaver {
 	
 	private String path;
+	//Use set because it will not add duplicate element.
 	private Set<String> foods;
 	private Set<String> books;
 	private Set<String> medicines;
@@ -21,28 +27,12 @@ public class CategorySaver {
 		this.medicines = new HashSet<String>();
 		storeAllFiles();
 	}
-	
-	public String tellMeclassified(String inputString) {
-		if(foods.contains(inputString)) {
-			return "food";
-		}
-		else if(books.contains(inputString)) {
-			return "book";
-		}
-		else if(medicines.contains(inputString)) {
-			return "medicines";
-		}
-		else {
-			return "else";
-		}
-	}
-	
+
 	private void storeAllFiles() {
-		
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 		
-		for (int i = 0; i < listOfFiles.length; i++) {
+		for (int i = 0 ; i < listOfFiles.length ; i++) {
 		  if (listOfFiles[i].isFile()) {
 			  
 			String fileName = listOfFiles[i].getName();
@@ -64,12 +54,9 @@ public class CategorySaver {
 			}
 		  }
 		}
-		
-//		System.out.println("Foods total:" + foods.size()+" books total: "+books.size() + " medicines total: "+medicines.size());
 	}
 	
-	private void storeFile(Set<String> product,String productPath) {
-//		System.out.println("My path:"+productPath);
+	private void storeFile(Set<String> product, String productPath) {
 		try {
 		    BufferedReader lineReader = new BufferedReader(new FileReader(productPath));
 		    String lineText = null;
@@ -84,4 +71,18 @@ public class CategorySaver {
 		}
 	}
 	
+	public String tellMeclassified(String inputString) {
+		if(foods.contains(inputString)) {
+			return "food";
+		}
+		else if(books.contains(inputString)) {
+			return "book";
+		}
+		else if(medicines.contains(inputString)) {
+			return "medicines";
+		}
+		else {
+			return "else";
+		}
+	}
 }
