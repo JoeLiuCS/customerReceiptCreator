@@ -13,13 +13,9 @@ Example:
 
 ---Please type absolute path from source files---
 
-For Example: /User/Source File/
-
 /Users/shuoqiaoliu/git/customerReceiptCreator/receiptAndTax/src/main/resources/
 
 ---Please type absolute path for Input files---
-
-For Example: /User/Download/
 
 /Users/shuoqiaoliu/git/customerReceiptCreator/receiptAndTax/src/main/resources/Inputs/
 
