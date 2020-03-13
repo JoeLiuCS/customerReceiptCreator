@@ -1,6 +1,8 @@
 # customerReceiptCreator
 Create a receipt by given input products
 
+13mins explannation video: https://youtu.be/d1YBLcSkuM0
+
 1. How Run my code?
 
 My program will ask you type two absolute path.
